@@ -18,8 +18,71 @@ class QuotesSpider(scrapy.Spider):
     name = 'quotes'
     allowed_domains = ['www.fe-siken.com']
     start_urls = []
-    no_list = [1, 2, 4, 6, 8, 9, 10, 11, 13, 14, 15, 16, 19, 20, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 39, 41,
-               42, 43, 44, 45, 46, 48, 49, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66, 67, 69, 70, 71, 72, 73, 74, 77, 78, 80]
+    no_list = [1,
+               2,
+               4,
+               6,
+               7,
+               8,
+               10,
+               11,
+               12,
+               13,
+               14,
+               15,
+               16,
+               17,
+               19,
+               20,
+               23,
+               25,
+               26,
+               27,
+               28,
+               29,
+               30,
+               31,
+               32,
+               33,
+               34,
+               36,
+               38,
+               39,
+               40,
+               41,
+               42,
+               43,
+               44,
+               45,
+               46,
+               47,
+               48,
+               49,
+               50,
+               51,
+               52,
+               54,
+               55,
+               56,
+               57,
+               58,
+               59,
+               60,
+               61,
+               62,
+               63,
+               64,
+               66,
+               67,
+               69,
+               71,
+               72,
+               73,
+               74,
+               77,
+               78,
+               79,
+               80]
     no_list.sort()
     for i in no_list:
         url = 'https://www.fe-siken.com/kakomon/31_haru/q' + str(i) + '.html'
@@ -30,7 +93,7 @@ class QuotesSpider(scrapy.Spider):
 
     def parse(self, response):
         print("---------------response")
-        time.sleep(1)
+        #time.sleep(1)
         #print(response.file)
         for quote in response.css('div.main.kako'):
             #print(quote.xpath('//*[@id="mainCol"]/div[2]/h2/text()')[0].extract())
@@ -51,4 +114,4 @@ class QuotesSpider(scrapy.Spider):
             #item['author'] = quote.css('small.author::text').extract_first()
             #item['text'] = quote.css('span.text::text').extract_first()
             #item['tags'] = quote.css('div.tags a.tag::text').extract()
-            yield item
+        return scrapy.Request(url=self.start_urls[0], callback=self.parse, property=1)
